@@ -1,0 +1,101 @@
+{
+  "name": "steam-achievement-tracker",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "steam-achievement-tracker",
+  "sourceRoot": "apps/steam-achievement-tracker/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/steam-achievement-tracker",
+        "index": "apps/steam-achievement-tracker/src/index.html",
+        "main": "apps/steam-achievement-tracker/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/steam-achievement-tracker/tsconfig.app.json",
+        "assets": [
+          "apps/steam-achievement-tracker/src/favicon.ico",
+          "apps/steam-achievement-tracker/src/assets"
+        ],
+        "styles": ["apps/steam-achievement-tracker/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "steam-achievement-tracker:build:production"
+        },
+        "development": {
+          "browserTarget": "steam-achievement-tracker:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "steam-achievement-tracker:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/steam-achievement-tracker/**/*.ts",
+          "apps/steam-achievement-tracker/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/steam-achievement-tracker/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "steam-achievement-tracker:build"
+      }
+    }
+  }
+}

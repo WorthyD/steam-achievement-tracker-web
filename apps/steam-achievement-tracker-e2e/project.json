@@ -1,0 +1,33 @@
+{
+  "name": "steam-achievement-tracker-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/steam-achievement-tracker-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/steam-achievement-tracker-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "steam-achievement-tracker:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "steam-achievement-tracker:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "steam-achievement-tracker:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/steam-achievement-tracker-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["steam-achievement-tracker"]
+}
