@@ -11,4 +11,9 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 })
 export class AppComponent {
   title = 'steam-achievement-tracker';
+
+  onInit(){
+
+    this.title = '';
+  }
 }
